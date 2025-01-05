@@ -9,15 +9,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    include "koneksi.php";
-                    $hlm = (isset($_POST['hlm'])) ? $_POST['hlm'] : 1;
-                    $limit = 3;
-                    $limit_start = ($hlm - 1) * $limit;
-                    $no = $limit_start + 1;
-
-                    while ($row = $hasil->fetch_assoc()) {
-                    ?>
                         <tr>
                             <td><?= $no++ ?></td>
                             <td>
