@@ -125,7 +125,7 @@ include "koneksi.php";
   </div>
 </section>
 <!-- article end -->
- 
+
       <selection id="schedule" class="text-center p-5">
         <div class="row row-cols-1 row-cols-md-4 g-4 justify-content-center">
           <div class="col">
@@ -146,7 +146,7 @@ include "koneksi.php";
             <div class="card text" style="max-width: 30rem;">
               <div class="card-header bg.success-subtle">Selasa</div>
               <div class="card-body">
-               <p class="card-title"><b>09.30 - 12.00</b></p>
+                <p class="card-title"><b>09.30 - 12.00</b></p>
                 <p class="card-title">Rekayasa Perangkat Lunak</p>
                 <p class="card-title">Ruang H.4.10</p>
                 <br>
@@ -208,22 +208,7 @@ include "koneksi.php";
           <div id="carouselExample" class="carousel slide">
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img src="foto/8.jpg" class="d-block w-100" alt="...">
-              </div>
-              <div class="carousel-item">
-                <img src="foto/9.jpg" class="d-block w-100" alt="...">
-              </div>
-              <div class="carousel-item">
-                <img src="foto/10.jpg" class="d-block w-100" alt="...">
-              </div>
-              <div class="carousel-item">
-                <img src="foto/11.jpg" class="d-block w-100" alt="...">
-              </div>
-              <div class="carousel-item">
-                <img src="foto/12.jpg" class="d-block w-100" alt="...">
-              </div>
-              <div class="carousel-item">
-                <img src="foto/13.jpg" class="d-block w-100" alt="...">
+                <img src="foto/<?= $row["gambar"]?>" class="d-block w-100" alt="...">
               </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
@@ -249,7 +234,7 @@ include "koneksi.php";
         ><i class="bi bi-whatsapp h2 p-2 text-dark"></i
         ></a>
         </div>
-        <div>Tiara Sofa &copy 2024</div>
+        <div>Tiara Sofa &copy 2025</div>
       </footer>
         
 

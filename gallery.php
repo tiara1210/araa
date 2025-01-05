@@ -71,7 +71,6 @@ include "upload_foto.php";
 if (isset($_POST['simpan'])) {
     $judul = $_POST['judul'];
     $isi = $_POST['isi'];
-    $tanggal = date("Y-m-d H:i:s");
     $username = $_SESSION['username'];
     $gambar = '';
     $nama_gambar = $_FILES['gambar']['name'];
@@ -114,18 +113,17 @@ if (isset($_POST['simpan'])) {
                                 judul =?,
                                 link =?,
                                 gambar = ?,
-                                tanggal = ?,
                                 username = ?
                                 WHERE id = ?");
 
-        $stmt->bind_param("sssssi", $judul, $link, $gambar, $tanggal, $username, $id);
+        $stmt->bind_param("sssssi", $judul, $link, $gambar, $username, $id);
         $simpan = $stmt->execute();
     } else {
 		    //jika tidak ada id, lakukan insert data baru
-        $stmt = $conn->prepare("INSERT INTO article (judul,link,gambar,tanggal,username)
-                                VALUES (?,?,?,?,?)");
+        $stmt = $conn->prepare("INSERT INTO article (judul,link,gambar,username)
+                                VALUES (?,?,?,?)");
 
-        $stmt->bind_param("sssss", $judul, $link, $gambar, $tanggal, $username);
+        $stmt->bind_param("sssss", $judul, $link, $gambar, $username);
         $simpan = $stmt->execute();
     }
 
