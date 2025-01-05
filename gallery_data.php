@@ -15,8 +15,6 @@
                     $limit = 3;
                     $limit_start = ($hlm - 1) * $limit;
                     $no = $limit_start + 1;
-                    
-                    $hasil = $conn->query($sql);
 
                     while ($row = $hasil->fetch_assoc()) {
                     ?>
