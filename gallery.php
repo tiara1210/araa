@@ -23,7 +23,7 @@
                         <input type="text" class="form-control" name="judul" placeholder="Tuliskan Judul Artikel" required>
                     </div>
                     <div class="mb-3">
-                        <label for="floatingTextarea2">link</label>
+                        <label for="floatingTextarea2">Link</label>
                         <textarea class="form-control" placeholder="Tuliskan Isi Artikel" name="link" required></textarea>
                     </div>
                     <div class="mb-3">
