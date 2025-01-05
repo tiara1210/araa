@@ -114,17 +114,18 @@ if (isset($_POST['simpan'])) {
                                 judul =?,
                                 link =?,
                                 gambar = ?,
+                                tanggal = ?,
                                 username = ?
                                 WHERE id = ?");
 
-        $stmt->bind_param("sssssi", $judul, $link, $gambar, $username, $id);
+        $stmt->bind_param("sssssi", $judul, $link, $gambar, $tanggal, $username, $id);
         $simpan = $stmt->execute();
     } else {
 		    //jika tidak ada id, lakukan insert data baru
-        $stmt = $conn->prepare("INSERT INTO article (judul,link,gambar,username)
+        $stmt = $conn->prepare("INSERT INTO article (judul,link,gambar,tanggal,username)
                                 VALUES (?,?,?,?,?)");
 
-        $stmt->bind_param("sssss", $judul, $link, $gambar, $username);
+        $stmt->bind_param("sssss", $judul, $link, $gambar, $tanggal, $username);
         $simpan = $stmt->execute();
     }
 

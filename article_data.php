@@ -71,9 +71,9 @@
                         <label for="formGroupExampleInput3" class="form-label">Gambar Lama</label>
                         <?php
                         if ($row["gambar"] != '') {
-                            if (file_exists('img/' . $row["gambar"] . '')) {
+                            if (file_exists('foto/' . $row["gambar"] . '')) {
                         ?>
-                                <br><img src="img/<?= $row["gambar"] ?>" width="100">
+                                <br><img src="foto/<?= $row["gambar"] ?>" width="100">
                         <?php
                             }
                         }
