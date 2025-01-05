@@ -204,7 +204,7 @@ include "koneksi.php";
 
       <section id="gallery" class="text-center p-5 bg-primary-subtle">
         <div class="fw-bold display-4 pb-3">
-
+        <h1 class="fw-bold display-4 pb-3">Gallery</h1>
           <div id="carouselExample" class="carousel slide">
             <div class="carousel-inner">
               <div class="carousel-item active">
@@ -239,9 +239,15 @@ include "koneksi.php";
       </section>
       <footer class="bg-primary-subtle text-center">
         <div>
-          <a href="https://www.instagram.com/tiara_ssss/profilecard/?igsh=YWZmazhjNDV0d2wz"><i class="bi bi-instagram h2 p-2 text-dark"></i></a>
-          <a href="https://wa.me/qr/DCSU3JIPINQ7A1"><i class="bi bi-whatsapp h2 p-2 text-dark"></i></a>
-          <a href="https://mail.google.com/mail/?authuser=0"><i class="bi bi-envelope h2 p-2 text-dark"></i></a>
+        <a href="https://www.instagram.com/tiara_ssss"
+        ><i class="bi bi-instagram h2 p-2 text-dark"></i
+        ></a>
+        <a href="https://twitter.com/udinusofficial"
+        ><i class="bi bi-twitter h2 p-2 text-dark"></i
+        ></a>
+        <a href="https://wa.me/+6287708325443"
+        ><i class="bi bi-whatsapp h2 p-2 text-dark"></i
+        ></a>
         </div>
         <div>Tiara Sofa &copy 2024</div>
       </footer>

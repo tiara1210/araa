@@ -105,17 +105,17 @@ if (!isset($_SESSION['username'])) {
     <!-- footer begin -->
     <footer class="text-center p-5 bg-danger-subtle">
     <div>
-        <a href="https://www.instagram.com/udinusofficial"
+        <a href="https://www.instagram.com/tiara_ssss"
         ><i class="bi bi-instagram h2 p-2 text-dark"></i
         ></a>
         <a href="https://twitter.com/udinusofficial"
         ><i class="bi bi-twitter h2 p-2 text-dark"></i
         ></a>
-        <a href="https://wa.me/+62812685577"
+        <a href="https://wa.me/+6287708325443"
         ><i class="bi bi-whatsapp h2 p-2 text-dark"></i
         ></a>
     </div>
-    <div>Tiara Sofa &copy; 2023</div>
+    <div>Tiara Sofa &copy; 2024</div>
     </footer>
     <!-- footer end -->
     <script
