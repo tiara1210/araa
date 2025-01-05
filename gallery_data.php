@@ -3,7 +3,7 @@
                     <tr>
                         <th>No</th>
                         <th class="w-25">Judul</th>
-                        <th class="w-75">Isi</th>
+                        <th class="w-75">Link</th>
                         <th class="w-25">Gambar</th>
                         <th class="w-25">Aksi</th>
                     </tr>
