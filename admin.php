@@ -45,7 +45,7 @@ if (!isset($_SESSION['username'])) {
 </head>
 <body>
     <!-- nav begin -->
-    <nav class="navbar navbar-expand-sm bg-body-tertiary sticky-top bg-danger-subtle">
+    <nav class="navbar navbar-expand-sm bg-body-tertiary sticky-top bg-primary-subtle">
     <div class="container">
         <a class="navbar-brand" target="_blank" href=".">My Daily Journal</a>
         <button
@@ -103,7 +103,7 @@ if (!isset($_SESSION['username'])) {
 </section>
 <!-- content end -->
     <!-- footer begin -->
-    <footer class="text-center p-5 bg-danger-subtle">
+    <footer class="text-center p-5 bg-primary-subtle">
     <div>
         <a href="https://www.instagram.com/tiara_ssss"
         ><i class="bi bi-instagram h2 p-2 text-dark"></i

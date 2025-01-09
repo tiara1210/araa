@@ -3,7 +3,7 @@ function upload_foto($File){
 	$uploadOk = 1;
 	$hasil = array();
 	$message = '';
- 
+
 	//File properties:
 	$FileName = $File['name'];
 	$TmpLocation = $File['tmp_name'];

@@ -2,8 +2,7 @@
                 <thead class="table-dark">
                     <tr>
                         <th>No</th>
-                        <th class="w-25">Judul</th>
-                        <th class="w-75">Link</th>
+                        <th class="w-25">Tanggal</th>
                         <th class="w-25">Gambar</th>
                         <th class="w-25">Aksi</th>
                     </tr>
@@ -12,7 +11,7 @@
                     <?php
                     include "koneksi.php";
                     $hlm = (isset($_POST['hlm'])) ? $_POST['hlm'] : 1;
-                    $limit = 5;
+                    $limit = 3;
                     $limit_start = ($hlm - 1) * $limit;
                     $no = $limit_start + 1;
                     
@@ -23,12 +22,7 @@
                     ?>
                         <tr>
                             <td><?= $no++ ?></td>
-                            <td>
-                                <strong><?= $row["judul"] ?></strong>
-                                <br>pada : <?= $row["tanggal"] ?>
-                                <br>oleh : <?= $row["username"] ?>
-                            </td>
-                            <td><?= $row["link"] ?></td>
+                            <td><?= $row["tanggal"] ?></td>
                             <td>
                                 <?php
                                 if ($row["gambar"] != '') {
@@ -54,15 +48,6 @@
             </div>
             <form method="post" action="" enctype="multipart/form-data">
                 <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="formGroupExampleInput" class="form-label">Judul</label>
-                        <input type="hidden" name="id" value="<?= $row["id"] ?>">
-                        <input type="text" class="form-control" name="judul" placeholder="Tuliskan Judul Gambar" value="<?= $row["judul"] ?>" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="floatingTextarea2">Link</label>
-                        <textarea class="form-control" placeholder="Masukan Link" name="isi" required><?= $row["link"] ?></textarea>
-                    </div>
                     <div class="mb-3">
                         <label for="formGroupExampleInput2" class="form-label">Ganti Gambar</label>
                         <input type="file" class="form-control" name="gambar">
@@ -102,7 +87,7 @@
             <form method="post" action="" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="formGroupExampleInput" class="form-label">Yakin akan menghapus Gallery "<strong><?= $row["judul"] ?></strong>"?</label>
+                        <label for="formGroupExampleInput" class="form-label">Yakin akan menghapus gambar "<strong><?= $row["judul"] ?></strong>"?</label>
                         <input type="hidden" name="id" value="<?= $row["id"] ?>">
                         <input type="hidden" name="gambar" value="<?= $row["gambar"] ?>">
                     </div>
@@ -129,7 +114,7 @@ $sql1 = "SELECT * FROM gallery";
 $hasil1 = $conn->query($sql1); 
 $total_records = $hasil1->num_rows;
 ?>
-<p>Total article : <?php echo $total_records; ?></p>
+<p>Total gallery : <?php echo $total_records; ?></p>
 <nav class="mb-2">
     <ul class="pagination justify-content-end">
     <?php

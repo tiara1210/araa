@@ -1,10 +1,10 @@
 <div class="container">
     <!-- Button trigger modal -->
 <button type="button" class="btn btn-secondary mb-2" data-bs-toggle="modal" data-bs-target="#modalTambah">
-    <i class="bi bi-plus-lg"></i> Tambah Gallery
+    <i class="bi bi-plus-lg"></i> Tambah Gambar
 </button>
     <div class="row">
-        <div class="table-responsive" id="galley_data">
+        <div class="table-responsive" id="gallery_data">
             
         </div>
 
@@ -18,14 +18,6 @@
             </div>
             <form method="post" action="" enctype="multipart/form-data">
                 <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="formGroupExampleInput" class="form-label">Judul</label>
-                        <input type="text" class="form-control" name="judul" placeholder="Tuliskan Judul Artikel" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="floatingTextarea2">Link</label>
-                        <textarea class="form-control" placeholder="Tuliskan Isi Artikel" name="link" required></textarea>
-                    </div>
                     <div class="mb-3">
                         <label for="formGroupExampleInput2" class="form-label">Gambar</label>
                         <input type="file" class="form-control" name="gambar">
@@ -52,7 +44,7 @@ $(document).ready(function(){
             method : "POST",
             data : {hlm: hlm},
             success : function(data){
-                    $('#galley_data').html(data);
+                    $('#gallery_data').html(data);
             }
         })
     } 
@@ -69,8 +61,6 @@ include "upload_foto.php";
 
 //jika tombol simpan diklik
 if (isset($_POST['simpan'])) {
-    $judul = $_POST['judul'];
-    $isi = $_POST['isi'];
     $username = $_SESSION['username'];
     $gambar = '';
     $nama_gambar = $_FILES['gambar']['name'];
@@ -110,20 +100,19 @@ if (isset($_POST['simpan'])) {
 
         $stmt = $conn->prepare("UPDATE gallery 
                                 SET 
-                                judul =?,
-                                link =?,
                                 gambar = ?,
-                                username = ?
+                                username = ?,
+                                tanggal = ?,
                                 WHERE id = ?");
 
-        $stmt->bind_param("sssssi", $judul, $link, $gambar, $username, $id);
+        $stmt->bind_param("sssssi", $gambar, $usename, $tanggal, $id);
         $simpan = $stmt->execute();
     } else {
 		    //jika tidak ada id, lakukan insert data baru
-        $stmt = $conn->prepare("INSERT INTO article (judul,link,gambar,username)
-                                VALUES (?,?,?,?)");
+        $stmt = $conn->prepare("INSERT INTO gallery (gambar, tanggal)
+                                VALUES (?,?)");
 
-        $stmt->bind_param("sssss", $judul, $link, $gambar, $username);
+        $stmt->bind_param("sssss", $gambar,$tanggal);
         $simpan = $stmt->execute();
     }
 
@@ -161,12 +150,12 @@ if (isset($_POST['hapus'])) {
     if ($hapus) {
         echo "<script>
             alert('Hapus data sukses');
-            document.location='admin.php?page=article';
+            document.location='admin.php?page=gallery';
         </script>";
     } else {
         echo "<script>
             alert('Hapus data gagal');
-            document.location='admin.php?page=article';
+            document.location='admin.php?page=gallery';
         </script>";
     }
 
