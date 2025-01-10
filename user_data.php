@@ -2,8 +2,9 @@
                 <thead class="table-dark">
                     <tr>
                         <th>No</th>
-                        <th class="w-20">Judul</th>
-                        <th class="w-50">Gambar</th>
+                        <th class="w-25">Foto</th>
+                        <th class="w-25">Username</th>
+                        <th class="w-25">Password</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -16,69 +17,68 @@
                     $limit_start = ($hlm - 1) * $limit;
                     $no = $limit_start + 1;
 
-                    $sql2 = "SELECT * FROM gallery ORDER BY id DESC LIMIT $limit_start, $limit";
-                    $hasil2 = $conn->query($sql2);
+                    $sql3 = "SELECT * FROM user ORDER BY id ASC LIMIT $limit_start, $limit";
+                    $hasil3 = $conn->query($sql3);
 
-                    while ($row = $hasil2->fetch_assoc()) {
+        
+                    while ($row = $hasil3->fetch_assoc()) {
                     ?>
                         <tr>
                             <td><?= $no++ ?></td>
                             <td>
-                                <strong><?= $row["judul"] ?></strong>
-                                <br>pada : <?= $row["tanggal"] ?>
-                                <br>oleh : <?= $row["username"] ?>
-                            </td>
-                        
-                            <td>
                                 <?php
-                                if ($row["gambar"] != '') {
-                                    if (file_exists('foto/' . $row["gambar"] . '')) {
+                                if ($row["foto"] != '') {
+                                    if (file_exists('foto/' . $row["foto"] . '')) {
                                 ?>
-                                        <img src="foto/<?= $row["gambar"] ?>" 
-                                            class="img-fluid"
-                                            style="max-height: 300px; width: 100%; object-fit: contain;"
-                                        >
+                                        <img src="foto/<?= $row["foto"] ?>" style="height: 170px; width: 170px; object-fit: cover;" class="rounded-circle" class="rounded-circle">
                                 <?php
                                     }
                                 }
                                 ?>
+                            </td> 
+                            <td>
+                                <strong><?= $row["username"] ?></strong>
                             </td>
-                            
+                            <td><?= $row["password"] ?></td>
                             <td>
                                 <a href="#" title="edit" class="badge rounded-pill text-bg-success" data-bs-toggle="modal" data-bs-target="#modalEdit<?= $row["id"] ?>"><i class="bi bi-pencil"></i></a>
                                 <a href="#" title="delete" class="badge rounded-pill text-bg-danger" data-bs-toggle="modal" data-bs-target="#modalHapus<?= $row["id"] ?>"><i class="bi bi-x-circle"></i></a>
-                                
+                            
                                 <!-- Awal Modal Edit -->
                                 <div class="modal fade" id="modalEdit<?= $row["id"] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Gallery</h1>
+                                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit User</h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <form method="post" action="" enctype="multipart/form-data">
                                                 <div class="modal-body">
                                                     <div class="mb-3">
-                                                        <label for="formGroupExampleInput" class="form-label">Judul</label>
+                                                        <label for="formGroupExampleInput" class="form-label">Username</label>
                                                         <input type="hidden" name="id" value="<?= $row["id"] ?>">
-                                                        <input type="text" class="form-control" name="judul" placeholder="Tuliskan Judul Gallery" value="<?= $row["judul"] ?>" required>
+                                                        <input type="text" class="form-control" name="username" placeholder="Masukkan usernamename" value="<?= $row["username"] ?>" required>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="formGroupExampleInput2" class="form-label">Ganti Gambar</label>
-                                                        <input type="file" class="form-control" name="gambar">
+                                                        <label for="formGroupExampleInput">Password</label>
+                                                        <input type="password" class="form-control" id="formGroupExampleInput" placeholder="Masukkan password baru" name="password">
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="formGroupExampleInput3" class="form-label">Gambar Lama</label>
+                                                        <label for="formGroupExampleInput2" class="form-label">Ganti foto</label>
+                                                        <input type="file" class="form-control" name="foto">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="formGroupExampleInput3" class="form-label">Foto Lama</label>
                                                         <?php
-                                                        if ($row["gambar"] != '') {
-                                                            if (file_exists('foto/' . $row["gambar"] . '')) {
+                                                        if ($row["foto"] != '') {
+                                                            if (file_exists('foto/' . $row["foto"] . '')) {
                                                         ?>
-                                                                <br><img src="foto/<?= $row["gambar"] ?>" width="100">
+                                                                <br><img src="foto/<?= $row["foto"] ?>" width="100">
                                                         <?php
                                                             }
                                                         }
                                                         ?>
-                                                        <input type="hidden" name="gambar_lama" value="<?= $row["gambar"] ?>">
+                                                        <input type="hidden" name="foto_lama" value="<?= $row["foto"] ?>">
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
@@ -96,20 +96,19 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Konfirmasi Hapus Gallery</h1>
+                                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Konfirmasi Hapus User</h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                            <form method="post" action="" enctype="multipart/form-data">
+                                            <form method="post" action="">
                                                 <div class="modal-body">
                                                     <div class="mb-3">
-                                                        <label for="formGroupExampleInput" class="form-label">Yakin akan menghapus gallery "<strong><?= $row["judul"] ?></strong>"?</label>
+                                                        <label for="formGroupExampleInput" class="form-label">Apakah anda yakin ingin menghapus user "<strong><?= $row["username"] ?></strong>"?</label>
                                                         <input type="hidden" name="id" value="<?= $row["id"] ?>">
-                                                        <input type="hidden" name="gambar" value="<?= $row["gambar"] ?>">
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">batal</button>
-                                                    <input type="submit" value="hapus" name="hapus" class="btn btn-primary">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                    <input type="submit" value="Hapus" name="hapus" class="btn btn-danger">
                                                 </div>
                                             </form>
                                         </div>
@@ -124,16 +123,14 @@
                 </tbody>
             </table>
 
-
-
 <?php 
-$sql2 = "SELECT * FROM gallery";
-$hasil2 = $conn->query($sql2); 
-$total_records = $hasil2->num_rows;
+$sql3 = "SELECT * FROM user";
+$hasil3 = $conn->query($sql3); 
+$total_records = $hasil3->num_rows;
 ?>
-<p>Total gallery : <?php echo $total_records; ?></p>
+<p>Total Users: <?php echo $total_records; ?></p>
 <nav class="mb-2">
-    <ul class="pagination justify-content-center">
+    <ul class="pagination justify-content-end">
     <?php
         $jumlah_page = ceil($total_records / $limit);
         $jumlah_number = 1; //jumlah halaman ke kanan dan kiri dari halaman yang aktif
@@ -158,7 +155,7 @@ $total_records = $hasil2->num_rows;
             echo '<li class="page-item disabled"><a class="page-link" href="#"><span aria-hidden="true">&raquo;</span></a></li>';
             echo '<li class="page-item disabled"><a class="page-link" href="#">Last</a></li>';
         } else {
-        $link_next = ($hlm < $jumlah_page)? $hlm + 1 : $jumlah_page;
+            $link_next = ($hlm < $jumlah_page)? $hlm + 1 : $jumlah_page;
             echo '<li class="page-item halaman" id="'.$link_next.'"><a class="page-link" href="#"><span aria-hidden="true">&raquo;</span></a></li>';
             echo '<li class="page-item halaman" id="'.$jumlah_page.'"><a class="page-link" href="#">Last</a></li>';
         }

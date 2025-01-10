@@ -203,16 +203,27 @@ include "koneksi.php";
       </selection>
 
       <section id="gallery" class="text-center p-5 bg-primary-subtle">
-        <div class="fw-bold display-4 pb-3">
-        <h1 class="fw-bold display-4 pb-3">Gallery</h1>
-          <div id="carouselExample" class="carousel slide">
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img src="foto/<?= $row["gambar"]?>" class="d-block w-100" alt="...">
+        <div class="fw-bold display-4 pb-3">Gallery</div>
+        <div id="carouselExample" class="carousel slide">
+          <div class="carousel-inner">
+            <?php
+              $sql = "SELECT * FROM gallery ORDER BY tanggal DESC";
+              $hasil = $conn->query($sql);
+
+              $isFirst = true; // Menandai item pertama
+              while ($row = $hasil->fetch_assoc()) {
+                $activeClass = $isFirst ? "active" : ""; // Hanya item pertama yang aktif
+                $isFirst = false; // Setelah iterasi pertama, set false
+            ?>
+              <div class="carousel-item <?= $activeClass ?>">
+                <img src="foto/<?= htmlspecialchars($row["gambar"], ENT_QUOTES) ?>" class="d-block w-100" alt="Gallery Image">
               </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <?php
+              }
+            ?>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
           </button>
           <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
@@ -220,8 +231,8 @@ include "koneksi.php";
             <span class="visually-hidden">Next</span>
           </button>
         </div>
-        </div>
       </section>
+
       <footer class="bg-primary-subtle text-center">
         <div>
         <a href="https://www.instagram.com/tiara_ssss"

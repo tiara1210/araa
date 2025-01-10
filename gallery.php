@@ -1,37 +1,44 @@
 <div class="container">
     <!-- Button trigger modal -->
-<button type="button" class="btn btn-secondary mb-2" data-bs-toggle="modal" data-bs-target="#modalTambah">
-    <i class="bi bi-plus-lg"></i> Tambah Gambar
-</button>
+    <button type="button" class="btn btn-secondary mb-2" data-bs-toggle="modal" data-bs-target="#modalTambah">
+        <i class="bi bi-plus-lg"></i> Tambah Gallery
+    </button>
     <div class="row">
         <div class="table-responsive" id="gallery_data">
             
         </div>
-
         <!-- Awal Modal Tambah-->
-<div class="modal fade" id="modalTambah" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Tambah Gallery</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form method="post" action="" enctype="multipart/form-data">
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="formGroupExampleInput2" class="form-label">Gambar</label>
-                        <input type="file" class="form-control" name="gambar">
+        <div class="modal fade" id="modalTambah" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Tambah Gallery</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+                    <form method="post" action="" enctype="multipart/form-data">
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="formGroupExampleInput" class="form-label">Judul</label>
+                                <input type="text" class="form-control" name="judul" placeholder="Tuliskan Judul Gallery" required>
+                            </div>
+                            <!-- <div class="mb-3">
+                                <label for="formGroupExampleInput" class="form-label">Link</label>
+                                <input type="text" class="form-control" placeholder="Masukkan link Gallery" name="link" required>
+                            </div> -->
+                            <div class="mb-3">
+                                <label for="formGroupExampleInput2" class="form-label">Gambar</label>
+                                <input type="file" class="form-control" name="gambar">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <input type="submit" value="simpan" name="simpan" class="btn btn-primary">
+                        </div>
+                    </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <input type="submit" value="simpan" name="simpan" class="btn btn-primary">
-                </div>
-            </form>
+            </div>
         </div>
-    </div>
-</div>
-<!-- Akhir Modal Tambah-->
+        <!-- Akhir Modal Tambah-->
     </div>
 </div>
 
@@ -42,13 +49,14 @@ $(document).ready(function(){
         $.ajax({
             url : "gallery_data.php",
             method : "POST",
-            data : {hlm: hlm},
+            data : {
+					            hlm: hlm
+				           },
             success : function(data){
                     $('#gallery_data').html(data);
             }
         })
     } 
-
     $(document).on('click', '.halaman', function(){
     var hlm = $(this).attr("id");
     load_data(hlm);
@@ -61,6 +69,8 @@ include "upload_foto.php";
 
 //jika tombol simpan diklik
 if (isset($_POST['simpan'])) {
+    $judul = $_POST['judul'];
+    $tanggal = date("Y-m-d H:i:s");
     $username = $_SESSION['username'];
     $gambar = '';
     $nama_gambar = $_FILES['gambar']['name'];
@@ -98,21 +108,22 @@ if (isset($_POST['simpan'])) {
             unlink("foto/" . $_POST['gambar_lama']);
         }
 
-        $stmt = $conn->prepare("UPDATE gallery 
+        $stmt = $conn->prepare("UPDATE gallery
                                 SET 
+                                judul =?,
                                 gambar = ?,
-                                username = ?,
                                 tanggal = ?,
+                                username = ?
                                 WHERE id = ?");
 
-        $stmt->bind_param("sssssi", $gambar, $usename, $tanggal, $id);
+        $stmt->bind_param("ssssi", $judul, $gambar, $tanggal, $username, $id);
         $simpan = $stmt->execute();
     } else {
 		    //jika tidak ada id, lakukan insert data baru
-        $stmt = $conn->prepare("INSERT INTO gallery (gambar, tanggal)
-                                VALUES (?,?)");
+        $stmt = $conn->prepare("INSERT INTO gallery (judul,gambar,tanggal,username)
+                                VALUES (?,?,?,?)");
 
-        $stmt->bind_param("sssss", $gambar,$tanggal);
+        $stmt->bind_param("ssss", $judul, $gambar, $tanggal, $username);
         $simpan = $stmt->execute();
     }
 
